@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LATEST RECHARGE SHOP - Bill Payment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f5ff, #e6f0ff);
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 100, 0.15);
+            overflow: hidden;
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #4361ee, #3a0ca3);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .watermark {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            opacity: 0.1;
+            font-size: 6rem;
+            color: white;
+            z-index: 0;
+        }
+
+        .logo {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo i {
+            font-size: 2.5rem;
+            background: white;
+            color: #4361ee;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .shop-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .shop-address {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        /* Form Styles */
+        .form-section {
+            padding: 25px 20px;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: #1d3557;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #4cc9f0;
+        }
+
+        .section-title i {
+            color: #4361ee;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1d3557;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e7ff;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: #f8f9ff;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #4361ee;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.2);
+            background: white;
+        }
+
+        .btn {
+            padding: 16px;
+            width: 100%;
+            background: linear-gradient(to right, #4361ee, #3a0ca3);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.5);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(to right, #25d366, #128c7e);
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-whatsapp:hover {
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Status Messages */
+        .status-message {
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 20px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1rem;
+            display: none;
+        }
+
+        .success {
+            background: rgba(76, 201, 240, 0.15);
+            color: #128c7e;
+            border: 2px solid #4cc9f0;
+            display: block;
+        }
+
+        .error {
+            background: rgba(247, 37, 133, 0.15);
+            color: #d32f2f;
+            border: 2px solid #f72585;
+            display: block;
+        }
+
+        /* WhatsApp Section */
+        .whatsapp-section {
+            background: white;
+            padding: 30px 20px;
+            text-align: center;
+            display: none;
+        }
+
+        .whatsapp-icon {
+            font-size: 4rem;
+            color: #25d366;
+            margin-bottom: 20px;
+            animation: bounce 1.5s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .whatsapp-text {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            color: #1d3557;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="watermark">
+                <i class="fab fa-whatsapp"></i>
+            </div>
+            <div class="logo">
+                <i class="fas fa-mobile-alt"></i>
+                <div>
+                    <div class="shop-name">LATEST RECHARGE SHOP</div>
+                    <div class="shop-address">Sait Lodge, Bazzar, 3 Veerabathra swamy kovil street,Nagapattinam</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2 class="section-title">
+                <i class="fas fa-file-invoice"></i> Create Payment Bill
+            </h2>
+
+            <div class="input-group">
+                <label for="customer-number"><i class="fas fa-phone"></i> Customer WhatsApp Number</label>
+                <input type="tel" id="customer-number" placeholder="Enter 10-digit mobile number" required>
+            </div>
+
+            <div class="input-group">
+                <label for="amount"><i class="fas fa-rupee-sign"></i> Amount (₹)</label>
+                <input type="number" id="amount" placeholder="Enter payment amount" min="1" required>
+            </div>
+
+            <div class="input-group">
+                <label for="service"><i class="fas fa-cogs"></i> Service Type</label>
+                <select id="service" required>
+                    <option value="">Select service</option>
+                    <option value="Mobile Recharge">Mobile Recharge</option>
+                    <option value="DTH Recharge">DTH Recharge</option>
+                    <option value="Electricity Bill">Electricity Bill</option>
+                    <option value="Amount Transaction">Amount Transaction</option>
+                    <option value="Other">Other Payment</option>
+                </select>
+            </div>
+
+            <button id="generate-btn" class="btn">
+                <i class="fas fa-bolt"></i> Generate & Send Bill
+            </button>
+
+            <div id="status-message" class="status-message"></div>
+        </div>
+
+        <div id="whatsapp-section" class="whatsapp-section">
+            <i class="fab fa-whatsapp whatsapp-icon"></i>
+            <p class="whatsapp-text">Bill sent successfully to <span id="sent-number"></span> via WhatsApp!</p>
+            <button id="new-bill" class="btn">
+                <i class="fas fa-plus"></i> Create New Bill
+            </button>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const customerNumber = document.getElementById('customer-number');
+        const amount = document.getElementById('amount');
+        const service = document.getElementById('service');
+        const generateBtn = document.getElementById('generate-btn');
+        const whatsappSection = document.getElementById('whatsapp-section');
+        const statusMessage = document.getElementById('status-message');
+        const sentNumber = document.getElementById('sent-number');
+        const newBillBtn = document.getElementById('new-bill');
+
+        function getCurrentDateTime() {
+            const now = new Date();
+
+            // Format date as DD/MM/YYYY
+            const day = String(now.getDate()).padStart(2, '0');
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const year = now.getFullYear();
+            const formattedDate = `${day}/${month}/${year}`;
+
+            // Format time as HH:MM:SS
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const formattedTime = `${hours}:${minutes}:${seconds}`;
+
+            return { date: formattedDate, time: formattedTime };
+        }
+
+        generateBtn.addEventListener('click', function () {
+            statusMessage.className = 'status-message';
+            statusMessage.textContent = '';
+
+            if (!customerNumber.value || !amount.value || !service.value) {
+                showStatus('Please fill all required fields', 'error');
+                return;
+            }
+
+            if (customerNumber.value.length !== 10) {
+                showStatus('Please enter a valid 10-digit mobile number', 'error');
+                return;
+            }
+
+            if (parseFloat(amount.value) <= 0) {
+                showStatus('Please enter a valid amount greater than 0', 'error');
+                return;
+            }
+
+            const datetime = getCurrentDateTime();
+            sendToWhatsApp(customerNumber.value, datetime.date, datetime.time);
+            showStatus('Bill link opened in WhatsApp.', 'success');
+            whatsappSection.style.display = 'block';
+            sentNumber.textContent = customerNumber.value;
+            whatsappSection.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        newBillBtn.addEventListener('click', function () {
+            customerNumber.value = '';
+            amount.value = '';
+            service.value = '';
+            whatsappSection.style.display = 'none';
+            statusMessage.className = 'status-message';
+            statusMessage.textContent = '';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        function sendToWhatsApp(number, date, time) {
+            const message = encodeURIComponent(
+                `*Payment Receipt from LATEST RECHARGE SHOP (SAIT LODGE)*\n\n` +
+                `🛒 *Service:* ${service.value}\n` +
+                `💰 *Amount:* ₹${amount.value}\n` +
+                `📅 *Date:* ${date}\n` +
+                `⏰ *Time:* ${time}\n\n` +
+                `*Customer Number:* ${number}\n\n` +
+                `✅ *Payment Status:* Successful\n\n` +
+                `Thank you for your payment!`
+            );
+
+            const whatsappUrl = `https://wa.me/91${number}?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function showStatus(text, type) {
+            statusMessage.textContent = text;
+            statusMessage.classList.add(type);
+        }
+
+        customerNumber.addEventListener('input', function (e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 10) value = value.substring(0, 10);
+            e.target.value = value;
+        });
+    });
+    </script>
+</body>
+</html>
