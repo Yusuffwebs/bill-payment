@@ -6,6 +6,20 @@
     <title>LATEST RECHARGE SHOP - Bill Payment</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a0ca3;
+            --secondary: #4cc9f0;
+            --danger: #f72585;
+            --success: #25d366;
+            --success-dark: #128c7e;
+            --dark: #1a1a2e;
+            --darker: #16213e;
+            --light: #f8f9ff;
+            --text: #e6e6e6;
+            --text-muted: #b8b8b8;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,10 +28,10 @@
         }
 
         body {
-            background: linear-gradient(135deg, #f0f5ff, #e6f0ff);
+            background: linear-gradient(135deg, #0f0c29, #302b63);
             min-height: 100vh;
             padding: 15px;
-            color: #333;
+            color: var(--text);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -26,20 +40,22 @@
         .container {
             width: 100%;
             max-width: 500px;
-            background: white;
+            background: var(--darker);
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 100, 0.15);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
             overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         /* Header Styles */
         .header {
-            background: linear-gradient(135deg, #4361ee, #3a0ca3);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             padding: 25px 20px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .watermark {
@@ -60,7 +76,7 @@
         .logo i {
             font-size: 2.5rem;
             background: white;
-            color: #4361ee;
+            color: var(--primary);
             width: 70px;
             height: 70px;
             border-radius: 50%;
@@ -83,6 +99,7 @@
             font-size: 0.95rem;
             opacity: 0.9;
             margin-top: 5px;
+            color: rgba(255, 255, 255, 0.8);
         }
 
         /* Form Styles */
@@ -92,17 +109,17 @@
 
         .section-title {
             font-size: 1.4rem;
-            color: #1d3557;
+            color: var(--secondary);
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 10px;
             padding-bottom: 10px;
-            border-bottom: 2px solid #4cc9f0;
+            border-bottom: 2px solid var(--secondary);
         }
 
         .section-title i {
-            color: #4361ee;
+            color: var(--secondary);
         }
 
         .input-group {
@@ -113,34 +130,62 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: #1d3557;
+            color: var(--text);
             font-size: 1rem;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        input, select {
+        input {
             width: 100%;
             padding: 15px;
-            border: 2px solid #e0e7ff;
+            border: 2px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             font-size: 1rem;
-            background: #f8f9ff;
+            background: white;
             transition: all 0.3s;
+            color: #333;
+        }
+
+        select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            font-size: 1.05rem;
+            background: white;
+            transition: all 0.3s;
+            color: #333;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 1em;
+        }
+
+        select option {
+            padding: 10px;
+            font-size: 1.05rem;
+            background: white;
+            color: #333;
+        }
+
+        input::placeholder {
+            color: #999;
         }
 
         input:focus, select:focus {
-            border-color: #4361ee;
+            border-color: var(--primary);
             outline: none;
             box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.2);
-            background: white;
         }
 
         .btn {
             padding: 16px;
             width: 100%;
-            background: linear-gradient(to right, #4361ee, #3a0ca3);
             color: white;
             border: none;
             border-radius: 12px;
@@ -153,25 +198,34 @@
             justify-content: center;
             gap: 10px;
             margin-top: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
             box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
         }
 
-        .btn:hover {
+        .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(67, 97, 238, 0.5);
         }
 
-        .btn:active {
-            transform: translateY(-1px);
-        }
-
         .btn-whatsapp {
-            background: linear-gradient(to right, #25d366, #128c7e);
+            background: linear-gradient(to right, var(--success), var(--success-dark));
             box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
         }
 
         .btn-whatsapp:hover {
             box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        .btn-danger {
+            background: linear-gradient(to right, var(--danger), #b5179e);
+            box-shadow: 0 5px 15px rgba(247, 37, 133, 0.4);
+        }
+
+        .btn-danger:hover {
+            box-shadow: 0 8px 20px rgba(247, 37, 133, 0.6);
         }
 
         /* Status Messages */
@@ -187,29 +241,30 @@
 
         .success {
             background: rgba(76, 201, 240, 0.15);
-            color: #128c7e;
-            border: 2px solid #4cc9f0;
+            color: var(--success);
+            border: 2px solid var(--secondary);
             display: block;
         }
 
         .error {
             background: rgba(247, 37, 133, 0.15);
-            color: #d32f2f;
-            border: 2px solid #f72585;
+            color: #ff6b6b;
+            border: 2px solid var(--danger);
             display: block;
         }
 
         /* WhatsApp Section */
         .whatsapp-section {
-            background: white;
+            background: var(--dark);
             padding: 30px 20px;
             text-align: center;
             display: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .whatsapp-icon {
             font-size: 4rem;
-            color: #25d366;
+            color: var(--success);
             margin-bottom: 20px;
             animation: bounce 1.5s infinite;
         }
@@ -222,9 +277,20 @@
         .whatsapp-text {
             font-size: 1.2rem;
             margin-bottom: 25px;
-            color: #1d3557;
+            color: var(--text);
             font-weight: 600;
             line-height: 1.6;
+        }
+
+        /* Button Group */
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .button-group .btn {
+            margin-top: 0;
+            flex: 1;
         }
     </style>
 </head>
@@ -238,7 +304,7 @@
                 <i class="fas fa-mobile-alt"></i>
                 <div>
                     <div class="shop-name">LATEST RECHARGE SHOP</div>
-                    <div class="shop-address">Sait Lodge, Bazzar, 3 Veerabathra swamy kovil street,Nagapattinam</div>
+                    <div class="shop-address">Sait Lodge, Bazaar, 3 Veerabathra swamy koil st, Nagapattinam</div>
                 </div>
             </div>
         </div>
@@ -270,9 +336,14 @@
                 </select>
             </div>
 
-            <button id="generate-btn" class="btn">
-                <i class="fas fa-bolt"></i> Generate & Send Bill
-            </button>
+            <div class="button-group">
+                <button id="generate-btn" class="btn btn-primary">
+                    <i class="fas fa-bolt"></i> Generate & Send Bill
+                </button>
+                <button id="clear-btn" class="btn btn-danger">
+                    <i class="fas fa-eraser"></i> Clear
+                </button>
+            </div>
 
             <div id="status-message" class="status-message"></div>
         </div>
@@ -280,7 +351,7 @@
         <div id="whatsapp-section" class="whatsapp-section">
             <i class="fab fa-whatsapp whatsapp-icon"></i>
             <p class="whatsapp-text">Bill sent successfully to <span id="sent-number"></span> via WhatsApp!</p>
-            <button id="new-bill" class="btn">
+            <button id="new-bill" class="btn btn-primary">
                 <i class="fas fa-plus"></i> Create New Bill
             </button>
         </div>
@@ -292,6 +363,7 @@
         const amount = document.getElementById('amount');
         const service = document.getElementById('service');
         const generateBtn = document.getElementById('generate-btn');
+        const clearBtn = document.getElementById('clear-btn');
         const whatsappSection = document.getElementById('whatsapp-section');
         const statusMessage = document.getElementById('status-message');
         const sentNumber = document.getElementById('sent-number');
@@ -342,6 +414,14 @@
             whatsappSection.scrollIntoView({ behavior: 'smooth' });
         });
 
+        clearBtn.addEventListener('click', function() {
+            customerNumber.value = '';
+            amount.value = '';
+            service.value = '';
+            statusMessage.className = 'status-message';
+            statusMessage.textContent = '';
+        });
+
         newBillBtn.addEventListener('click', function () {
             customerNumber.value = '';
             amount.value = '';
@@ -354,13 +434,14 @@
 
         function sendToWhatsApp(number, date, time) {
             const message = encodeURIComponent(
-                `*Payment Receipt from LATEST RECHARGE SHOP (SAIT LODGE)*\n\n` +
+                `*Payment Receipt from SAIT LODGE (LATEST RECHARGE SHOP)*\n\n` +
                 `🛒 *Service:* ${service.value}\n` +
                 `💰 *Amount:* ₹${amount.value}\n` +
                 `📅 *Date:* ${date}\n` +
                 `⏰ *Time:* ${time}\n\n` +
                 `*Customer Number:* ${number}\n\n` +
                 `✅ *Payment Status:* Successful\n\n` +
+                `Visit our website: https://saitlodgelatestshop.netlify.app/\n\n` +
                 `Thank you for your payment!`
             );
 
